@@ -27,4 +27,21 @@ public class BookResourceTest {
                 .body(is("2"));
     }
 
+    @Test
+    public void getBookByExistingIdTest() {
+        given()
+            .when().get("/book/2")
+            .then()
+                .statusCode(200)
+                .body(is("{\"id\":2,\"numberOfPages\":295,\"title\":\"The Hard Things About Hard Things\"}"));
+    }
+
+    @Test
+    public void getBookByNonexistentIdTest() {
+        given()
+                .when().get("/book/3")
+                .then()
+                .statusCode(200)
+                .body(is("null"));
+    }
 }
