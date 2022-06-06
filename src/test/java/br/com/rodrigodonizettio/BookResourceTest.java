@@ -8,14 +8,16 @@ import static org.hamcrest.CoreMatchers.is;
 
 @QuarkusTest
 public class BookResourceTest {
-
     @Test
-    public void testHelloEndpoint() {
+    public void getAllBooksTest() {
         given()
           .when().get("/book")
           .then()
              .statusCode(200)
-             .body(is("Hello RESTEasy"));
+             .body(is("[{\"id\":1,\"numberOfPages\":272,\"title\":\"Essentialism\"}," +
+                            "{\"id\":2,\"numberOfPages\":295,\"title\":\"The Hard Things About Hard Things\"}]"));
+    }
+
     }
 
 }
