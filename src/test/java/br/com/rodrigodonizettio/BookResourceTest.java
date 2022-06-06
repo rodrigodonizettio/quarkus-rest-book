@@ -18,6 +18,13 @@ public class BookResourceTest {
                             "{\"id\":2,\"numberOfPages\":295,\"title\":\"The Hard Things About Hard Things\"}]"));
     }
 
+    @Test
+    public void countBooksTest() {
+        given()
+            .when().get("/book/count")
+            .then()
+                .statusCode(200)
+                .body(is("2"));
     }
 
 }
