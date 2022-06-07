@@ -1,7 +1,9 @@
 package br.com.rodrigodonizettio.inbound;
 
 import br.com.rodrigodonizettio.model.Book;
+import br.com.rodrigodonizettio.repository.BookRepository;
 
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -12,26 +14,26 @@ import java.util.Optional;
 
 @Path("/book")
 public class BookResource {
+    @Inject
+    BookRepository bookRepository;
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Book> getAll() {
-        return List.of(
-                new Book(1, "Essentialism", 272),
-                new Book(2, "The Hard Things About Hard Things", 295)
-        );
+        return bookRepository.getAll();
     }
 
     @GET
     @Path("/count")
     @Produces(MediaType.TEXT_PLAIN)
     public Integer countAll() {
-        return getAll().size();
+        return bookRepository.countAll();
     }
 
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Optional<Book> getBookById(@PathParam("id") Integer id) {
-        return getAll().stream().filter(b -> b.getId().equals(id)).findFirst();
+        return bookRepository.getBookById(id);
     }
 }
