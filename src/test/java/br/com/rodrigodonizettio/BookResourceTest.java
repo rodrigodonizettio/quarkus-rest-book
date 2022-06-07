@@ -3,6 +3,10 @@ package br.com.rodrigodonizettio;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
 
+import javax.ws.rs.core.HttpHeaders;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 
@@ -34,6 +38,20 @@ public class BookResourceTest {
             .then()
                 .statusCode(200)
                 .body(is("{\"id\":2,\"numberOfPages\":295,\"title\":\"The Hard Things About Hard Things\"}"));
+    }
+
+    @Test
+    public void getAnotherBookByExistingIdTest() {
+        given()
+            .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON)
+            .pathParam("id", 1)
+        .when()
+            .get("/book/{id}")
+        .then()
+            .statusCode(Response.Status.OK.getStatusCode())
+            .body("id", is(1))
+            .body("numberOfPages", is(272))
+            .body("title", is("Essentialism"));
     }
 
     @Test
