@@ -4,11 +4,13 @@ public class Book {
     private Integer id;
     private String title;
     private int numberOfPages;
+    private String isTranslated;
 
-    public Book(Integer id, String title, int numberOfPages) {
+    public Book(Integer id, String title, int numberOfPages, String isTranslated) {
         this.id = id;
         this.title = title;
         this.numberOfPages = numberOfPages;
+        this.isTranslated = isTranslated;
     }
 
     public Integer getId() {
@@ -33,5 +35,13 @@ public class Book {
 
     public void setNumberOfPages(int numberOfPages) {
         this.numberOfPages = numberOfPages;
+    }
+
+    public String getIsTranslated() {
+        return isTranslated;
+    }
+
+    public void setIsTranslated(String isTranslated) {
+        this.isTranslated = isTranslated;
     }
 }
